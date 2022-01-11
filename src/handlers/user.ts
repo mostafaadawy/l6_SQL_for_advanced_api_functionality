@@ -85,6 +85,7 @@ const authenticate = async (req: Request, res: Response) => {
 		return res.send("Missing/Invalid parameters, the following parameter are required: firstname, lastname, password");
 	}
 	const user: User = { firstname, lastname, password };
+	console.log(req.body)
 	try {
 		const u = await store.authenticate(user.firstname, user.lastname, user.password);
 		if (u === null) {
@@ -126,7 +127,7 @@ const destroy = async (req: Request, res: Response) => {
 	}
 };
 
-const users_routes = (app: express.Application) => {
+const UsersRoutes = (app: express.Application) => {
 	app.get("/users", index);
 	app.get("/users/:id", show);
 	app.put("/users", update);
@@ -135,4 +136,4 @@ const users_routes = (app: express.Application) => {
 	app.post("/users/login", authenticate);
 };
 
-export default users_routes;
+export default UsersRoutes;
